@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App.jsx";
-import configure from "../components/configure.jsx";
+import configure from "../components/TableDisplay.jsx";
 
 
 export const router = createBrowserRouter([
