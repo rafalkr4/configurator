@@ -8,7 +8,7 @@ function TableDisplay({ dimensions }) {
         height: `${width * 1.6}px`,
         width: `${length * 1.6}px`,
         backgroundImage: "url(/src/images/structure-horizontal.jpeg)",
-        backgroundColor: 'brown',
+        backgroundColor: dimensions.color,
         backgroundBlendMode: 'multiply',
         borderRadius: dimensions.rounded ? "7px" : "0",
         border: "2px solid black",

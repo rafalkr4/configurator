@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl, InputLabel, MenuItem, Select, Typography, Box, FormControlLabel, Switch, TextField } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, Typography, Box, FormControlLabel, Switch, Slider } from '@mui/material';
 
 const minMaxMap = {
     length: {min: 65, max: 260},
@@ -7,36 +7,67 @@ const minMaxMap = {
     height: {min: 50, max: 120}
 };
 
+const colors = ["#3E2723", "#4E342E", "#5D4037", "#6D4C41", "#795548", "#8D6E63", "#9E786D"];
+
 function TableCustomizer({ dimensions, setDimensions }) {
-    const handleChange = (dimension, value) => {
-        if (value === "" || isNaN(value)) {
-            alert('Only numbers are allowed');
-            return;
-        }
-        if (value < minMaxMap[dimension].min || value > minMaxMap[dimension].max) {
-            alert(`Value for ${dimension} should be between ${minMaxMap[dimension].min} and ${minMaxMap[dimension].max}`);
-            return;
-        }
+    const handleSliderChange = (dimension, value) => {
         setDimensions({...dimensions, [dimension]: value});
     };
+
+    const handleColorChange = (event) => {
+        setDimensions({ ...dimensions, color: event.target.value });
+    }
+
+    const generateMarks = (min, max) => {
+        let marks = [];
+        for(let i = min; i <= max; i += 10){
+            marks.push({value: i});
+        }
+        return marks;
+    }
 
     return (
         <Box sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom>Customize your table</Typography>
             {['length', 'width', 'height'].map((dimension) => (
                 <Box key={dimension} sx={{ mb: 3 }}>
-                    <TextField
-                        label={dimension}
-                        type="number"
+                    <Typography id="input-slider" gutterBottom>
+                        {dimension}
+                    </Typography>
+                    <Slider
                         value={dimensions[dimension]}
-                        onChange={(event) => handleChange(dimension, parseInt(event.target.value, 10))}
+                        min={minMaxMap[dimension].min}
+                        max={minMaxMap[dimension].max}
+                        onChange={(event, newValue) => handleSliderChange(dimension, newValue)}
+                        aria-labelledby="input-slider"
+                        valueLabelDisplay="auto"
+                        valueLabelFormat={(value) => `${value} cm`}
+                        marks={generateMarks(minMaxMap[dimension].min, minMaxMap[dimension].max)}
                     />
                 </Box>
             ))}
-            <FormControlLabel
-                control={<Switch checked={dimensions.rounded} onChange={(event) => setDimensions({ ...dimensions, rounded: event.target.checked })} />}
-                label={<Typography style={{color: dimensions.rounded ? "black" : "grey"}}>Rounded corners</Typography>}
-            />
+            <FormControl sx={{ mb: 3 }}>
+                <InputLabel id="color-select-label">Color</InputLabel>
+                <Select
+                    labelId="color-select-label"
+                    id="color-select"
+                    value={dimensions.color || colors[0]}
+                    onChange={handleColorChange}
+                >
+                    {colors.map((color, index) => (
+                        <MenuItem key={index} value={color}>
+                            {`Color ${index + 1}`}
+                            <Box sx={{ width: 24, height: 24, ml: 1, backgroundColor: color }} />
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+            <Box sx={{ mb: 3 }}>
+                <FormControlLabel
+                    control={<Switch checked={dimensions.rounded} onChange={(event) => setDimensions({ ...dimensions, rounded: event.target.checked })} />}
+                    label={<Typography style={{color: dimensions.rounded ? "black" : "grey"}}>Rounded corners</Typography>}
+                />
+            </Box>
         </Box>
     );
 }

@@ -50,7 +50,7 @@ import TableDisplay from './components/TableDisplay';
 import SideTableDisplay from './components/SideTableDisplay';
 
 function App() {
-    const [dimensions, setDimensions] = useState({ length: 65, width: 50, height: 50 });
+    const [dimensions, setDimensions] = useState({ length: 65, width: 50, height: 50, color: "#3E2723", rounded: false });
 
     return (
         <Container>

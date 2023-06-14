@@ -8,7 +8,7 @@ function SideTableDisplay({ dimensions }) {
         height: `${height * 1.6}px`,
         width: `25px`,
         backgroundImage: "url(/src/images/structure.jpeg)",
-        backgroundColor: 'brown',
+        backgroundColor: dimensions.color,
         backgroundBlendMode: 'multiply',
         border: '2px solid black',
     };
@@ -17,7 +17,7 @@ function SideTableDisplay({ dimensions }) {
         width: `${length * 1.6}px`,
         height: `20px`,
         backgroundImage: "url(/src/images/structure.jpeg)",
-        backgroundColor: 'brown',
+        backgroundColor: dimensions.color,
         backgroundBlendMode: 'multiply',
         borderRadius: dimensions.rounded ? "7px" : "0",
         border: '2px solid black',
