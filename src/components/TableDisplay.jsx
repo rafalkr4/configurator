@@ -64,18 +64,34 @@
 // export default TableDisplay;
 
 
-import React from "react";
-import { Box } from "@mui/material";
+import React from 'react';
+import { Box } from '@mui/material';
 
+import shortTableImage from '../images/shortTableImage.png';
+import mediumTableImage from '../images/mediumTableImage.png';
+import tallTableImage from '../images/tallTableImage.png';
+import roundedTableImage from '../images/roundedTableImage.png';
 
 function TableDisplay({ dimensions }) {
-    const tableImageSrc =
 
-  return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', my: 2 }}>
-      <img src={tableImageSrc} alt="Custom table" />
-    </Box>
-  );
+    let tableImageSrc = '';
+
+    if (dimensions.height === 'short' && dimensions.length === 'short' && dimensions.width === 'short') {
+        tableImageSrc = shortTableImage;
+    } else if (dimensions.height === 'medium' && dimensions.length === 'medium' && dimensions.width === 'medium') {
+        tableImageSrc = mediumTableImage;
+    } else if (dimensions.height === 'tall' && dimensions.length === 'tall' && dimensions.width === 'tall') {
+        tableImageSrc = tallTableImage;
+    } else if (dimensions.rounded) {
+        tableImageSrc = roundedTableImage;
+    }
+
+    return (
+        <Box sx={{ display: 'flex', justifyContent: 'center', my: 2 }}>
+            <img src={tableImageSrc} alt="Custom table" />
+        </Box>
+    );
 }
 
 export default TableDisplay;
+
