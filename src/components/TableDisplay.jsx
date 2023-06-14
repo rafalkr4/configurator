@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-// These could be any values you want to represent the different sizes.
 const sizeMap = {
     short: 50,
     medium: 100,
@@ -10,19 +9,47 @@ const sizeMap = {
 
 function TableDisplay({ dimensions }) {
     const { length, width, height } = dimensions;
-    const divStyle = {
-        height: `${sizeMap[height]}px`,
+
+    const divStyleTop = {
+        height: `${sizeMap[width]}px`,
         width: `${sizeMap[length]}px`,
-        backgroundColor: 'saddlebrown',
-        borderRadius: dimensions.rounded ? "7%" : "0",
+        backgroundColor: 'brown',
+        borderRadius: dimensions.rounded ? "7px" : "0",
     };
 
+    const legWidth = 10;
+    const legOffset = sizeMap[length] * 0.12;
+
+    const divStyleSideLeg = {
+        height: `${sizeMap[height]}px`,
+        width: `${legWidth}px`,
+        backgroundColor: 'brown',
+        borderRadius: dimensions.rounded ? "3px" : "0",
+    };
+
+    const divStyleSideTop = {
+        height: `10px`,
+        width: `${sizeMap[length] - 2 * (legWidth + legOffset)}px`,
+        backgroundColor: 'brown',
+        position: 'relative',
+        marginLeft: `${legWidth + legOffset}px`,
+        marginRight: `${legWidth + legOffset}px`,
+        borderRadius: dimensions.rounded ? "0 0 10px 10px" : "0",
+    };
 
     return (
-        <Box sx={{ p: 2 }}>
-            <div style={divStyle} />
+        <Box sx={{ p: 2, position: 'relative' }}>
             <Box sx={{ mt: 2 }}>
-                <strong>Dimensions:</strong> Length: {length}, Width: {width}, Height: {height}
+                <strong>Top Table View:</strong>
+            </Box>
+            <div style={divStyleTop} />
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2, position: 'relative' }}>
+                <div style={divStyleSideLeg} />
+                <div style={divStyleSideTop} />
+                <div style={divStyleSideLeg} />
+            </Box>
+            <Box sx={{ mt: 2 }}>
+                <strong>Side Table View:</strong> Length: {length}, Height: {height}
             </Box>
         </Box>
     );
