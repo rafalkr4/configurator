@@ -44,12 +44,13 @@
 // export default App;
 
 import React, { useState } from 'react';
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, TextField, Typography, FormControlLabel, Switch } from '@mui/material';
 import TableCustomizer from './components/TableCustomizer';
 import TableDisplay from './components/TableDisplay';
+import SideTableDisplay from './components/SideTableDisplay';
 
 function App() {
-    const [dimensions, setDimensions] = useState({ length: 'short', width: 'short', height: 'short' });
+    const [dimensions, setDimensions] = useState({ length: 65, width: 50, height: 50 });
 
     return (
         <Container>
@@ -59,7 +60,10 @@ function App() {
                         <TableCustomizer dimensions={dimensions} setDimensions={setDimensions} />
                     </Grid>
                     <Grid item xs={12} md={8}>
-                        <TableDisplay dimensions={dimensions} />
+                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', height: '100%' }}>
+                            <TableDisplay dimensions={dimensions} />
+                            <SideTableDisplay dimensions={dimensions} />
+                        </Box>
                     </Grid>
                 </Grid>
             </Box>
@@ -68,4 +72,5 @@ function App() {
 }
 
 export default App;
+
 

@@ -1,27 +1,37 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 function SideTableDisplay({ dimensions }) {
     const { length, height } = dimensions;
 
     const divStyleVertical = {
-        height: `${height}px`,
-        width: `10px`,
+        height: `${height * 1.6}px`,
+        width: `25px`,
+        backgroundImage: "url(/src/images/structure.jpeg)",
         backgroundColor: 'brown',
+        backgroundBlendMode: 'multiply',
+        border: '2px solid black',
     };
 
     const divStyleHorizontal = {
-        width: `${length}px`,
-        height: `10px`,
+        width: `${length * 1.6}px`,
+        height: `20px`,
+        backgroundImage: "url(/src/images/structure.jpeg)",
         backgroundColor: 'brown',
+        backgroundBlendMode: 'multiply',
+        borderRadius: dimensions.rounded ? "7px" : "0",
+        border: '2px solid black',
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
-            <div style={divStyleHorizontal} />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: `${length}px` }}>
-                <div style={divStyleVertical} />
-                <div style={divStyleVertical} />
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, mt: 3 }}>
+            <Typography variant="h6" gutterBottom>Side View</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
+                <div style={divStyleHorizontal} />
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', width: `${length}px` }}>
+                    <div style={divStyleVertical} />
+                    <div style={divStyleVertical} />
+                </Box>
             </Box>
         </Box>
     );

@@ -1,28 +1,36 @@
 import React from 'react';
-import { FormControl, InputLabel, MenuItem, Select, Typography, Box, FormControlLabel, Switch } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, Typography, Box, FormControlLabel, Switch, TextField } from '@mui/material';
 
-const options = ['short', 'medium', 'tall'];
+const minMaxMap = {
+    length: {min: 65, max: 260},
+    width: {min: 50, max: 130},
+    height: {min: 50, max: 120}
+};
 
 function TableCustomizer({ dimensions, setDimensions }) {
+    const handleChange = (dimension, value) => {
+        if (value === "" || isNaN(value)) {
+            alert('Only numbers are allowed');
+            return;
+        }
+        if (value < minMaxMap[dimension].min || value > minMaxMap[dimension].max) {
+            alert(`Value for ${dimension} should be between ${minMaxMap[dimension].min} and ${minMaxMap[dimension].max}`);
+            return;
+        }
+        setDimensions({...dimensions, [dimension]: value});
+    };
+
     return (
         <Box sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom>Customize your table</Typography>
             {['length', 'width', 'height'].map((dimension) => (
                 <Box key={dimension} sx={{ mb: 3 }}>
-                    <FormControl fullWidth>
-                        <InputLabel id={`${dimension}-select-label`}>{dimension}</InputLabel>
-                        <Select
-                            labelId={`${dimension}-select-label`}
-                            id={`${dimension}-select`}
-                            value={dimensions[dimension]}
-                            label={dimension}
-                            onChange={(event) => setDimensions({ ...dimensions, [dimension]: event.target.value })}
-                        >
-                            {options.map((option) => (
-                                <MenuItem key={option} value={option}>{option}</MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                    <TextField
+                        label={dimension}
+                        type="number"
+                        value={dimensions[dimension]}
+                        onChange={(event) => handleChange(dimension, parseInt(event.target.value, 10))}
+                    />
                 </Box>
             ))}
             <FormControlLabel

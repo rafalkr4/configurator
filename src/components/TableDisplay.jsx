@@ -1,55 +1,24 @@
 import React from 'react';
-import { Box } from '@mui/material';
-
-const sizeMap = {
-    short: 50,
-    medium: 100,
-    tall: 150
-};
+import { Box, Typography } from '@mui/material';
 
 function TableDisplay({ dimensions }) {
     const { length, width, height } = dimensions;
 
     const divStyleTop = {
-        height: `${sizeMap[width]}px`,
-        width: `${sizeMap[length]}px`,
+        height: `${width * 1.6}px`,
+        width: `${length * 1.6}px`,
+        backgroundImage: "url(/src/images/structure-horizontal.jpeg)",
         backgroundColor: 'brown',
+        backgroundBlendMode: 'multiply',
         borderRadius: dimensions.rounded ? "7px" : "0",
-    };
-
-    const legWidth = 10;
-    const legOffset = sizeMap[length] * 0.12;
-
-    const divStyleSideLeg = {
-        height: `${sizeMap[height]}px`,
-        width: `${legWidth}px`,
-        backgroundColor: 'brown',
-        borderRadius: dimensions.rounded ? "3px" : "0",
-    };
-
-    const divStyleSideTop = {
-        height: `10px`,
-        width: `${sizeMap[length] - 2 * (legWidth + legOffset)}px`,
-        backgroundColor: 'brown',
-        position: 'relative',
-        marginLeft: `${legWidth + legOffset}px`,
-        marginRight: `${legWidth + legOffset}px`,
-        borderRadius: dimensions.rounded ? "0 0 10px 10px" : "0",
+        border: "2px solid black",
     };
 
     return (
-        <Box sx={{ p: 2, position: 'relative' }}>
-            <Box sx={{ mt: 2 }}>
-                <strong>Top Table View:</strong>
-            </Box>
+        <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}>
+            <Typography variant="h6" gutterBottom>Top View</Typography>
             <div style={divStyleTop} />
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2, position: 'relative' }}>
-                <div style={divStyleSideLeg} />
-                <div style={divStyleSideTop} />
-                <div style={divStyleSideLeg} />
-            </Box>
             <Box sx={{ mt: 2 }}>
-                <strong>Side Table View:</strong> Length: {length}, Height: {height}
             </Box>
         </Box>
     );
