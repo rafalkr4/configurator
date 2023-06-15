@@ -607,6 +607,30 @@
       "color": "#3E2723",
       "rounded": true,
       "id": 77
+    },
+    {
+      "length": 65,
+      "width": 50,
+      "height": 50,
+      "color": "#3E2723",
+      "rounded": false,
+      "id": 78
+    },
+    {
+      "length": 65,
+      "width": 50,
+      "height": 50,
+      "color": "#3E2723",
+      "rounded": false,
+      "id": 79
+    },
+    {
+      "length": 155,
+      "width": 101,
+      "height": 115,
+      "color": "#6D4C41",
+      "rounded": false,
+      "id": 80
     }
   ]
 }

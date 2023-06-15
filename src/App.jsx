@@ -47,7 +47,7 @@ function App() {
 
     return (
         <Container>
-            <Box sx={{ my: 4, bgcolor: "#F5F5F5", border: "2px solid black", borderRadius: "5px", p: 5 }}>
+            <Box sx={{ my: 4, bgcolor: "#F5F5F5", border: "2px solid black", borderRadius: "5px", p: 5, boxShadow: "0px 2px 4px black" }}>
                 <Grid container spacing={2} direction="row-reverse">
                     <Grid item xs={12} md={4}>
                         <TableCustomizer dimensions={dimensions} setDimensions={setDimensions} handleGetQuote={handleGetQuote} />
