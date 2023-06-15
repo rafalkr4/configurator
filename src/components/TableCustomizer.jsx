@@ -18,6 +18,8 @@ function TableCustomizer({ dimensions, setDimensions }) {
         setDimensions({ ...dimensions, color: event.target.value });
     }
 
+
+
     const generateMarks = (min, max) => {
         let marks = [];
         for(let i = min; i <= max; i += 10){
@@ -47,7 +49,7 @@ function TableCustomizer({ dimensions, setDimensions }) {
                 </Box>
             ))}
             <FormControl sx={{ mb: 3 }}>
-                <InputLabel id="color-select-label">Color</InputLabel>
+                <InputLabel id="color-select-label"></InputLabel>
                 <Select
                     labelId="color-select-label"
                     id="color-select"
@@ -67,7 +69,9 @@ function TableCustomizer({ dimensions, setDimensions }) {
                     control={<Switch checked={dimensions.rounded} onChange={(event) => setDimensions({ ...dimensions, rounded: event.target.checked })} />}
                     label={<Typography style={{color: dimensions.rounded ? "black" : "grey"}}>Rounded corners</Typography>}
                 />
+                <Typography variant="h6">Table dimensions: {dimensions.length} x {dimensions.width} x {dimensions.height} cm</Typography>
             </Box>
+
         </Box>
     );
 }
