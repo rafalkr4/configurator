@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl, InputLabel, MenuItem, Select, Typography, Box, FormControlLabel, Switch, Slider } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, Typography, Snackbar, Box, FormControlLabel, Switch, Slider, Button } from '@mui/material';
 
 const minMaxMap = {
     length: {min: 65, max: 260},
@@ -9,7 +9,7 @@ const minMaxMap = {
 
 const colors = ["#3E2723", "#4E342E", "#5D4037", "#6D4C41", "#795548", "#8D6E63", "#9E786D"];
 
-function TableCustomizer({ dimensions, setDimensions }) {
+function TableCustomizer({ dimensions, setDimensions, handleGetQuote, serverMessage, errorMessage  }) {
     const handleSliderChange = (dimension, value) => {
         setDimensions({...dimensions, [dimension]: value});
     };
@@ -17,8 +17,6 @@ function TableCustomizer({ dimensions, setDimensions }) {
     const handleColorChange = (event) => {
         setDimensions({ ...dimensions, color: event.target.value });
     }
-
-
 
     const generateMarks = (min, max) => {
         let marks = [];
@@ -69,9 +67,10 @@ function TableCustomizer({ dimensions, setDimensions }) {
                     control={<Switch checked={dimensions.rounded} onChange={(event) => setDimensions({ ...dimensions, rounded: event.target.checked })} />}
                     label={<Typography style={{color: dimensions.rounded ? "black" : "grey"}}>Rounded corners</Typography>}
                 />
-                <Typography variant="h6">Table dimensions: {dimensions.length} x {dimensions.width} x {dimensions.height} cm</Typography>
-            </Box>
+                <Typography variant="h6" sx={{ fontSize: '1.1rem' }}>Table dimensions: {dimensions.length} x {dimensions.width} x {dimensions.height} cm</Typography>
 
+            </Box>
+            <Button style={{ marginTop: '25px' }} variant="contained" onClick={handleGetQuote}>Get Quote</Button>
         </Box>
     );
 }

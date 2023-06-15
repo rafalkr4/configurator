@@ -16,7 +16,7 @@ function SideTableDisplay({ dimensions }) {
     const divStyleHorizontal = {
         width: `${length * 1.6}px`,
         height: `20px`,
-        backgroundImage: "url(/src/images/structure.jpeg)",
+        backgroundImage: "url(/src/images/structure-horizontal.jpeg)",
         backgroundColor: dimensions.color,
         backgroundBlendMode: 'multiply',
         borderRadius: dimensions.rounded ? "7px" : "0",
